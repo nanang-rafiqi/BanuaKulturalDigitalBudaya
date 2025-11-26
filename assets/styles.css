@@ -923,7 +923,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   position: relative;
   display: block;
   margin: 0;
-  padding-left: 18px;
 }
 
 .about-photo img {
@@ -935,7 +934,6 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
   display: block;
-  margin-left: 18px;
 }
 
 .about-content {
