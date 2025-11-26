@@ -118,8 +118,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 /* ========================================
    Hero
 ======================================== */
+/* ========================================
+   Hero
+======================================== */
 .hero {
-  background: var(--cream);
+  background: linear-gradient(rgba(250, 247, 242, 0.92), rgba(250, 247, 242, 0.92)), 
+                 url('/assets/image/fixkebudayaan/Banjarmasin.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   padding: 80px 0 100px;
 }
 
