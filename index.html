@@ -55,27 +55,22 @@
               if (bgMusic) {
                 bgMusic.volume = 0.3; // Set volume to 30%
                 
-                // Coba play langsung
-                const playPromise = bgMusic.play();
-                if (playPromise !== undefined) {
-                  playPromise
+                // Strategy: Try autoplay dengan fallback ke user interaction
+                const playMusic = () => {
+                  bgMusic.play()
                     .then(() => {
-                      console.log("Music started playing automatically");
+                      console.log("✅ Musik playing");
                     })
-                    .catch(error => {
-                      console.log("Autoplay blocked by browser policy");
-                      // Trigger play on first user interaction (click, touch, keypress)
-                      const playOnInteraction = function() {
-                        bgMusic.play().catch(err => console.log("Still blocked:", err));
-                        document.removeEventListener('click', playOnInteraction);
-                        document.removeEventListener('touchstart', playOnInteraction);
-                        document.removeEventListener('keydown', playOnInteraction);
-                      };
-                      document.addEventListener('click', playOnInteraction);
-                      document.addEventListener('touchstart', playOnInteraction);
-                      document.addEventListener('keydown', playOnInteraction);
+                    .catch(() => {
+                      // Jika blocked, tunggu user click
+                      document.body.addEventListener('click', () => {
+                        bgMusic.play();
+                      }, { once: true });
                     });
-                }
+                };
+                
+                // Coba play setelah buffer minimal tersedia
+                bgMusic.addEventListener('canplay', playMusic, { once: true });
               }
             });
           });
